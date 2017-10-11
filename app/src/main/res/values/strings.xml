@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GarageAdministrationApp</string>
+    <string name="welcome_text">COBE garage</string>
+    <string name="input_car_btn_text">Input car to fix</string>
+    <string name="salary_calculator_btn_text">Calculate salary</string>
+    <string name="refill_expendables_btn_text">Refill expendable items</string>
+    <string name="check_balance_btn_text">Check bank balance</string>
+    <string name="garage_logo_description_text">Garage logo</string>
 </resources>
