@@ -2,11 +2,13 @@ package com.example.cobeosijek.garageadministrationapp.inventory;
 
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
+import java.io.Serializable;
+
 /**
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class ReusableItem extends Item implements WorkingItem {
+public class ReusableItem extends Item implements WorkingItem,Serializable {
 
     private double sizeOfItem;
 

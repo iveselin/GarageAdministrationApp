@@ -23,9 +23,9 @@ public class GarageCreationUtil {
 
         List<Apprentice> apprentices = new ArrayList<>();
 
-        apprentices.add(new Apprentice("Ivan", FieldOfWorkEnum.BODYWORKER, "HR12312313"));
-        apprentices.add(new Apprentice("Tomislav", FieldOfWorkEnum.BODYWORKER, "HR123456789"));
-        apprentices.add(new Apprentice("John", FieldOfWorkEnum.MECHANIC, "HR12312313"));
+        apprentices.add(new Apprentice("Ivan", FieldOfWorkEnum.BODYWORKER));
+        apprentices.add(new Apprentice("Tomislav", FieldOfWorkEnum.BODYWORKER));
+        apprentices.add(new Apprentice("John", FieldOfWorkEnum.MECHANIC));
 
         return apprentices;
     }
@@ -34,8 +34,8 @@ public class GarageCreationUtil {
 
         List<Technician> technicians = new ArrayList<>();
 
-        technicians.add(new Technician("Joseph", FieldOfWorkEnum.MECHANIC, "HR987654321", 1));
-        technicians.add(new Technician("Mladen", FieldOfWorkEnum.BODYWORKER, "HR987654321", 2));
+        technicians.add(new Technician("Joseph", FieldOfWorkEnum.MECHANIC, 1));
+        technicians.add(new Technician("Mladen", FieldOfWorkEnum.BODYWORKER, 2));
 
         return technicians;
     }

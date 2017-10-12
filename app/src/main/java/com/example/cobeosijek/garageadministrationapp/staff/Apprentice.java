@@ -2,16 +2,18 @@ package com.example.cobeosijek.garageadministrationapp.staff;
 
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
+import java.io.Serializable;
+
 /**
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class Apprentice extends Person {
+public class Apprentice extends Person implements Serializable{
     private boolean isAvailable = true;
     private static final int workCost = 50;
 
-    public Apprentice(String employeeName, FieldOfWorkEnum fieldOFWork, String accountIBAN) {
-        super(employeeName, fieldOFWork, accountIBAN);
+    public Apprentice(String employeeName, FieldOfWorkEnum fieldOFWork) {
+        super(employeeName, fieldOFWork);
     }
 
 

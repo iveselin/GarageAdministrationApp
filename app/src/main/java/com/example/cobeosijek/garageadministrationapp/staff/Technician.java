@@ -5,6 +5,7 @@ import com.example.cobeosijek.garageadministrationapp.inventory.ReusableItem;
 import com.example.cobeosijek.garageadministrationapp.inventory.ReusableTypeEnum;
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class Technician extends Person {
+public class Technician extends Person implements Serializable{
     private int numOfApprentices;
     private static final int workCost = 120;
 
@@ -20,8 +21,8 @@ public class Technician extends Person {
         return workCost;
     }
 
-    public Technician(String employeeName, FieldOfWorkEnum fieldOFWork, String accountIBAN, int numOfApprentices) {
-        super(employeeName, fieldOFWork, accountIBAN);
+    public Technician(String employeeName, FieldOfWorkEnum fieldOFWork, int numOfApprentices) {
+        super(employeeName, fieldOFWork);
         this.numOfApprentices = numOfApprentices;
     }
 

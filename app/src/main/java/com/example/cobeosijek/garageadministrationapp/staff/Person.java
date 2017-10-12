@@ -1,19 +1,19 @@
 package com.example.cobeosijek.garageadministrationapp.staff;
 
+import java.io.Serializable;
+
 /**
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class Person {
+public class Person implements Serializable{
     private String employeeName;
     private FieldOfWorkEnum fieldOFWork;
-    private String accountIBAN;
     private byte workHours;
 
-    Person(String employeeName, FieldOfWorkEnum fieldOFWork, String accountIBAN) {
+    public Person(String employeeName, FieldOfWorkEnum fieldOFWork) {
         this.employeeName = employeeName;
         this.fieldOFWork = fieldOFWork;
-        this.accountIBAN = accountIBAN;
         this.workHours = 0;
     }
 
@@ -23,10 +23,6 @@ public class Person {
 
     public FieldOfWorkEnum getFieldOFWork() {
         return fieldOFWork;
-    }
-
-    public String getAccountIBAN() {
-        return accountIBAN;
     }
 
     public byte getWorkHours() {

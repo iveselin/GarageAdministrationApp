@@ -8,6 +8,7 @@ import com.example.cobeosijek.garageadministrationapp.staff.Technician;
 import com.example.cobeosijek.garageadministrationapp.utilities.GarageCreationUtil;
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 // TODO: 11/10/2017 change all console outputs to appropriate outputs
 
-public class Garage {
+public class Garage implements Serializable {
 
     private List<Apprentice> apprentices = new ArrayList<>();
     private List<Technician> technicians = new ArrayList<>();

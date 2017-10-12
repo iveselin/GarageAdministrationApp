@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String KEY_OWNER_NAME = "owner_name";
     public static final String KEY_OWNER_EMAIL = "owner_email";
     public static final String KEY_WORK_NEEDED = "work_needed";
+    public static final String KEY_GARAGE_SENT = "garage";
 
     Button inputCarButton, salaryCalculatorButton, refillExpendablesButton, checkBalanceButton;
     ImageView garageLogoImageView;
@@ -58,15 +59,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.inputCarBTN:
+
                 Intent startCarInput = new Intent(getApplicationContext(), CarInputActivity.class);
                 this.startActivityForResult(startCarInput, KEY_CAR_REQUEST);
                 break;
+
             case R.id.salaryCalculatorBTN:
                 // TODO: 11/10/2017 calculate salary and show results in recycler view
+                Intent startStaffList = new Intent(getApplicationContext(), StaffListActivity.class);
+                startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
+                startActivity(startStaffList);
                 break;
+
             case R.id.refillExpendablesBTN:
                 // TODO: 11/10/2017 show a list of expendables and on long click add new items to it
                 break;
+
             case R.id.checkBalanceBTN:
                 // TODO: 11/10/2017 think how to improve this
                 Toast.makeText(this, String.format("Your current bank balance is %.2f$", myGarage.getBankBalance()), Toast.LENGTH_SHORT).show();
@@ -118,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String carTestOutput = String.format("%s, %s, %s", carToFix.getOwnerName(), carToFix.getOwnerEmail(), carToFix.getWorkNeeded());
         Toast.makeText(this, carTestOutput, Toast.LENGTH_SHORT).show();
 
-        // TODO: 12/10/2017 fix the carToFix
+        // TODO: 12/10/2017 fix the carToFix and display it somewhere
+
     }
 }
