@@ -6,7 +6,7 @@
     tools:context="com.example.cobeosijek.garageadministrationapp.MainActivity">
 
     <ImageView
-        android:id="@+id/garageLogoImageView"
+        android:id="@+id/garageLogoIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -14,39 +14,39 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/garageLogoImageView"
-        android:text="@string/welcome_text"
-        android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/inputCarButton"
+        android:id="@+id/welcomeTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/garageLogoImageView"
+        android:layout_toRightOf="@id/garageLogoIV"
+        android:gravity="center"
+        android:text="@string/welcome_text" />
+
+    <Button
+        android:id="@+id/inputCarBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/garageLogoIV"
         android:text="@string/input_car_btn_text" />
 
     <Button
-        android:id="@+id/salaryCalculatorButton"
+        android:id="@+id/salaryCalculatorBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputCarButton"
+        android:layout_below="@id/inputCarBTN"
         android:text="@string/salary_calculator_btn_text" />
 
     <Button
-        android:id="@+id/refillExpendablesButton"
+        android:id="@+id/refillExpendablesBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/salaryCalculatorButton"
+        android:layout_below="@id/salaryCalculatorBTN"
         android:text="@string/refill_expendables_btn_text" />
 
     <Button
-        android:id="@+id/checkBalanceButton"
+        android:id="@+id/checkBalanceBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/refillExpendablesButton"
+        android:layout_below="@id/refillExpendablesBTN"
         android:text="@string/check_balance_btn_text" />
 
 </RelativeLayout>

@@ -6,4 +6,12 @@
     <string name="refill_expendables_btn_text">Refill expendable items</string>
     <string name="check_balance_btn_text">Check bank balance</string>
     <string name="garage_logo_description_text">Garage logo</string>
+    <string name="car_input_title_text">Input car form</string>
+    <string name="owner_name_hint">Input owners name</string>
+    <string name="owner_email_hint">Input owners E-mail</string>
+    <string name="mechanic_work_radio_button">Mechanic Work</string>
+    <string name="body_work_radio_button">Body work</string>
+    <string name="both_work_radio_button">Both</string>
+    <string name="radio_group_title">Choose work needed:</string>
+    <string name="submit_car_text">Submit</string>
 </resources>

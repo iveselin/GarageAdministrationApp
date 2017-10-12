@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.cobeosijek.garageadministrationapp.CarInputActivity">
 
+    <TextView
+        android:id="@+id/carInputTitleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/car_input_title_text" />
 
+    <EditText
+        android:id="@+id/ownerNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/owner_name_hint"
+        android:inputType="text" />
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/ownerEmailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ownerNameET"
+        android:hint="@string/owner_email_hint"
+        android:inputType="textEmailAddress" />
+
+    <RadioGroup
+        android:id="@+id/workNeededRG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ownerEmailET">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_group_title" />
+
+        <RadioButton
+            android:id="@+id/mechanicRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mechanic_work_radio_button" />
+
+        <RadioButton
+            android:id="@+id/bodyworkRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/body_work_radio_button" />
+
+        <RadioButton
+            android:id="@+id/bothRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/both_work_radio_button" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submitCarBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workNeededRG"
+        android:text="@string/submit_car_text" />
+
+</RelativeLayout>
