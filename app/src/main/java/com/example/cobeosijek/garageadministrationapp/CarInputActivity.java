@@ -47,7 +47,7 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        // TODO: 12/10/2017 first check if empty
+
         if (TextUtils.isEmpty(ownerNameET.getText().toString())) {
             ownerNameET.setError("You can't leave this empty");
             return;
@@ -59,6 +59,7 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
         String ownerName = ownerNameET.getText().toString();
         String ownerEmail = ownerEmailET.getText().toString();
         int workNeededFlag = workNeededRG.indexOfChild(workNeededRBTN);
+
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra(MainActivity.KEY_OWNER_NAME, ownerName);

@@ -65,18 +65,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.salaryCalculatorBTN:
-                // TODO: 11/10/2017 calculate salary and show results in recycler view
+                // TODO: 13/10/2017 calculate salary in staff activity and reset work hours in main
                 Intent startStaffList = new Intent(getApplicationContext(), StaffListActivity.class);
                 startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
                 startActivity(startStaffList);
                 break;
 
             case R.id.refillExpendablesBTN:
-                // TODO: 11/10/2017 show a list of expendables and on long click add new items to it
+                // TODO: 13/10/2017 fix so its on long click and reflect changes onto main garage
+                Intent startExpendablesList = new Intent(getApplicationContext(), ExpendablesListActivity.class);
+                startExpendablesList.putExtra(KEY_GARAGE_SENT, myGarage);
+                startActivity(startExpendablesList);
                 break;
 
             case R.id.checkBalanceBTN:
-                // TODO: 11/10/2017 think how to improve this
+                // TODO: 11/10/2017 think how to improve this yeppp
                 Toast.makeText(this, String.format("Your current bank balance is %.2f$", myGarage.getBankBalance()), Toast.LENGTH_SHORT).show();
                 break;
         }

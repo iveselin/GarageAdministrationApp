@@ -23,7 +23,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".StaffListActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".ExpendablesListActivity"></activity>
     </application>
 
 </manifest>

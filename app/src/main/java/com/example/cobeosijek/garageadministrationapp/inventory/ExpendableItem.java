@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class ExpendableItem extends Item implements WorkingItem,Serializable {
+public class ExpendableItem extends Item implements WorkingItem, Serializable {
     private ExpendableTypeEnum expendableType;
     private int quantityLeft;
 
@@ -16,17 +16,19 @@ public class ExpendableItem extends Item implements WorkingItem,Serializable {
 
         super(itemName);
         this.expendableType = expendableType;
-// TODO: 10/10/2017 dont use this in constr.
+        this.quantityLeft = setQuantity();
+
+    }
+
+    private int setQuantity() {
+
         switch (expendableType) {
             case SPRAYPAINT:
-                quantityLeft = 5;
-                break;
+                return 5;
             case SANDPAPER:
-                quantityLeft = 10;
-                break;
+                return 10;
             default:
-                quantityLeft = 0;
-                break;
+                return 0;
         }
     }
 
@@ -39,14 +41,12 @@ public class ExpendableItem extends Item implements WorkingItem,Serializable {
 
         if (this.quantityLeft > 0) {
 
-            System.out.println(String.format("\t%s was used and it costs %.2f$", this.getItemName(), this.getUseCost()));
             carToBeFixed.addWorkCost(this.getUseCost());
             quantityLeft--;
             return true;
 
         } else {
 
-            System.out.println("Oh no, there is not enough " + expendableType + ", you should refill.");
             return false;
         }
 
