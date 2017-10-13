@@ -70,6 +70,7 @@
             android:id="@+id/mechanicRB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/mechanic_work_radio_button" />
 
         <RadioButton

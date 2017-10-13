@@ -13,7 +13,7 @@ import java.util.List;
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class Technician extends Person implements Serializable{
+public class Technician extends Person implements Serializable {
     private int numOfApprentices;
     private static final int workCost = 120;
 
@@ -44,8 +44,6 @@ public class Technician extends Person implements Serializable{
         //if not enough apprentices, abort
         if (currentNumOfApprentices < this.numOfApprentices) {
 
-            System.out.println("Not enough apprentices, try later");
-
             for (Apprentice apprentice : apprentices) {
                 apprentice.setAvailable(true);
             }
@@ -59,7 +57,6 @@ public class Technician extends Person implements Serializable{
 
                 if (expendableItem.getQuantityLeft() < 1) {
 
-                    System.out.println("You have to refill on your expendables first");
 
                     for (Apprentice apprentice : apprentices) {
                         apprentice.setAvailable(true);
@@ -70,9 +67,6 @@ public class Technician extends Person implements Serializable{
             }
         }
         //if everything ok, do the work
-        String outputString = String.format("Technician %s worked on the car and his work costs %.2f$. He also needed %d apprentice(s):",
-                this.getEmployeeName(), (float) workCost, numOfApprentices);
-        System.out.println(outputString);
         //make an apprentice do the work and then release them
         for (Apprentice workingApprentice : workingApprentices) {
 
@@ -80,13 +74,12 @@ public class Technician extends Person implements Serializable{
             workingApprentice.setAvailable(true);
         }
         //output the tools used and cost of it
-        System.out.println("They used: ");
+
         if (this.getFieldOFWork() == FieldOfWorkEnum.BODYWORKER) {
 
             for (ExpendableItem expendableItem : expendableItems) {
 
                 if (!expendableItem.beUsed(carToFix)) {
-                    System.out.println("\nYou have to refill on expendables, then try to fix the car\n");
                     return;
                 }
 

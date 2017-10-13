@@ -36,7 +36,8 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
         ownerNameET = (EditText) findViewById(R.id.ownerNameET);
         workNeededRG = (RadioGroup) findViewById(R.id.workNeededRG);
         submitBTN = (Button) findViewById(R.id.submitCarBTN);
-        workNeededRG.check(R.id.mechanicRB);
+        workNeededRBTN = findViewById(R.id.mechanicRB);
+
     }
 
     private void setListeners() {
@@ -49,10 +50,13 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
 
         if (TextUtils.isEmpty(ownerNameET.getText().toString())) {
+
             ownerNameET.setError("You can't leave this empty");
             return;
+
         } else if (TextUtils.isEmpty(ownerEmailET.getText().toString())) {
-            ownerEmailET.setError("You cant leave this empty");
+
+            ownerEmailET.setError("You can't leave this empty");
             return;
         }
 
@@ -74,6 +78,7 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+
         workNeededRBTN = (RadioButton) findViewById(i);
     }
 }

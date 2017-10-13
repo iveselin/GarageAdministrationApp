@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * Created by cobeosijek on 11/10/2017.
  */
-// TODO: 11/10/2017 change all console outputs to appropriate outputs
 
 public class Garage implements Serializable {
 
@@ -81,14 +80,12 @@ public class Garage implements Serializable {
         }
         if (inputCar.isFixed()) {
 
-            System.out.println(String.format("The car is fixed, here is the final cost: %.2f$", inputCar.getWorkingCost()));
             this.changeBankBalance(inputCar.getWorkingCost());
 
-            System.out.println(String.format("You should contact %s, here is his email: %s",
-                    inputCar.getOwnerName(), inputCar.getOwnerEmail()));
 
         } else {
-            System.out.println("We don't have enough technicians, try later");
+            //alert with mistake
+            //System.out.println("We don't have enough technicians, try later");
         }
     }
 

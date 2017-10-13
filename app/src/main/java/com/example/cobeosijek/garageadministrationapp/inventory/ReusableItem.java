@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class ReusableItem extends Item implements WorkingItem,Serializable {
+public class ReusableItem extends Item implements WorkingItem, Serializable {
 
     private double sizeOfItem;
 
@@ -34,7 +34,6 @@ public class ReusableItem extends Item implements WorkingItem,Serializable {
     @Override
     public boolean beUsed(Car carToBeFixed) {
 
-        System.out.println(String.format("\t%s was used and it costs %.2f$", this.getItemName(), this.getUseCost()));
         carToBeFixed.addWorkCost(this.getUseCost());
 
         return true;

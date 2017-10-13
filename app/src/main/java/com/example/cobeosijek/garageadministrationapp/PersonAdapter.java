@@ -16,7 +16,12 @@ import java.util.ArrayList;
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder> {
 
+    public interface ItemClickListener {
+        void onClick(View view, int position);
+    }
+
     ArrayList<Person> persons;
+    private ItemClickListener itemClickListener;
 
     public PersonAdapter(ArrayList<Person> persons) {
         this.persons = persons;
@@ -42,12 +47,16 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
     }
 
+    public void setClickListener(PersonAdapter.ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
     @Override
     public int getItemCount() {
         return persons.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView personNameTV;
         TextView personFieldOfWorkTV;
@@ -60,6 +69,14 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
             this.personNameTV = itemView.findViewById(R.id.personNameTV);
             this.personFieldOfWorkTV = itemView.findViewById(R.id.personFieldOfWorkTV);
             this.personSalaryTV = itemView.findViewById(R.id.personSalaryTV);
+
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition());
         }
     }
 }

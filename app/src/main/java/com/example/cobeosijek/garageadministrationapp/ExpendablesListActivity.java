@@ -43,9 +43,6 @@ public class ExpendablesListActivity extends AppCompatActivity implements Expend
 
     }
 
-    public void onClickCalled(int position) {
-
-    }
 
     @Override
     public void onClick(View view, int position) {

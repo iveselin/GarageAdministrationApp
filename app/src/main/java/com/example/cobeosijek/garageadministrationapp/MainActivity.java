@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 import com.example.cobeosijek.garageadministrationapp.working_on.WorkNeededEnum;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int KEY_CAR_REQUEST = 2;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.salaryCalculatorBTN:
-                // TODO: 13/10/2017 calculate salary in staff activity and reset work hours in main
+                // TODO: 13/10/2017 reset work hours in main
                 Intent startStaffList = new Intent(getApplicationContext(), StaffListActivity.class);
                 startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
                 startActivity(startStaffList);
@@ -79,16 +81,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.checkBalanceBTN:
-                // TODO: 11/10/2017 think how to improve this yeppp
-                Toast.makeText(this, String.format("Your current bank balance is %.2f$", myGarage.getBankBalance()), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, String.format(Locale.getDefault(), "Your current bank balance is %.2f$",
+                        myGarage.getBankBalance()), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == KEY_CAR_REQUEST) {
+
             if (resultCode == RESULT_OK) {
                 createCar(data.getExtras());
             }
@@ -99,19 +105,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String ownerName = null;
         String ownerEmail = null;
         WorkNeededEnum workNeeded = null;
-        // TODO: 12/10/2017 maybe put everything in one if so you are sure that you have everything...
-        if (extras.containsKey(KEY_OWNER_NAME)) {
+
+        if (extras.containsKey(KEY_OWNER_NAME) && extras.containsKey(KEY_OWNER_EMAIL) && extras.containsKey(KEY_WORK_NEEDED)) {
+
             ownerName = extras.getString(KEY_OWNER_NAME);
-        }
 
-        if (extras.containsKey(KEY_OWNER_EMAIL)) {
             ownerEmail = extras.getString(KEY_OWNER_EMAIL);
-        }
-
-        if (extras.containsKey(KEY_WORK_NEEDED)) {
 
             int workNeededFlag = extras.getInt(KEY_WORK_NEEDED);
-
             switch (workNeededFlag) {
                 case 1:
                     workNeeded = WorkNeededEnum.MECHANIC;
@@ -123,13 +124,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     workNeeded = WorkNeededEnum.BOTH;
                     break;
             }
+        } else {
+            return;
         }
+
         Car carToFix = new Car(ownerName, ownerEmail, workNeeded);
 
-        String carTestOutput = String.format("%s, %s, %s", carToFix.getOwnerName(), carToFix.getOwnerEmail(), carToFix.getWorkNeeded());
-        Toast.makeText(this, carTestOutput, Toast.LENGTH_SHORT).show();
+        myGarage.fixCar(carToFix);
 
-        // TODO: 12/10/2017 fix the carToFix and display it somewhere
-
+        // TODO: 13/10/2017 send car and display its info
     }
 }
