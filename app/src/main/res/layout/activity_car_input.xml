@@ -5,18 +5,43 @@
     android:layout_height="match_parent"
     tools:context="com.example.cobeosijek.garageadministrationapp.CarInputActivity">
 
-    <TextView
-        android:id="@+id/carInputTitleTV"
+
+    <RelativeLayout
+        android:id="@+id/headingRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="@string/car_input_title_text" />
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/garageLogoIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:contentDescription="@string/garage_logo_description_text"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/carInputTitleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:gravity="center"
+            android:text="@string/car_input_title_text"
+            android:textColor="@color/whiteeee"
+            android:textSize="@dimen/headingTextSize" />
+
+
+    </RelativeLayout>
+
 
     <EditText
         android:id="@+id/ownerNameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/headingRL"
+        android:layout_margin="@dimen/defaultMargin"
         android:hint="@string/owner_name_hint"
         android:inputType="text" />
 
@@ -25,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ownerNameET"
+        android:layout_margin="@dimen/defaultMargin"
         android:hint="@string/owner_email_hint"
         android:inputType="textEmailAddress" />
 
@@ -32,7 +58,8 @@
         android:id="@+id/workNeededRG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ownerEmailET">
+        android:layout_below="@id/ownerEmailET"
+        android:layout_margin="@dimen/defaultMargin">
 
         <TextView
             android:layout_width="match_parent"
@@ -63,6 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/workNeededRG"
+        android:layout_margin="@dimen/defaultMargin"
         android:text="@string/submit_car_text" />
 
 </RelativeLayout>

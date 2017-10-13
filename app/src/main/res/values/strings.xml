@@ -14,4 +14,6 @@
     <string name="both_work_radio_button">Both</string>
     <string name="radio_group_title">Choose work needed:</string>
     <string name="submit_car_text">Submit</string>
+    <string name="staf_list_heading_text">Staf list</string>
+    <string name="expendables_heading_text">Expendables</string>
 </resources>

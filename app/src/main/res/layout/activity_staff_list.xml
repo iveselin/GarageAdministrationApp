@@ -4,10 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/headingRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/garageLogoIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:contentDescription="@string/garage_logo_description_text"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/welcomeTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/defaultMargin"
+            android:layout_toRightOf="@id/garageLogoIV"
+            android:gravity="center"
+            android:text="@string/staf_list_heading_text"
+            android:textColor="@color/whiteeee"
+            android:textSize="@dimen/headingTextSize" />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/staffListRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headingRL">
 
     </android.support.v7.widget.RecyclerView>
 

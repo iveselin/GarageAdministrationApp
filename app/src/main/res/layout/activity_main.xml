@@ -5,27 +5,40 @@
     android:layout_height="match_parent"
     tools:context="com.example.cobeosijek.garageadministrationapp.MainActivity">
 
-    <ImageView
-        android:id="@+id/garageLogoIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/garage_logo_description_text"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/welcomeTV"
+    <RelativeLayout
+        android:id="@+id/headingRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/garageLogoIV"
-        android:gravity="center"
-        android:text="@string/welcome_text" />
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/garageLogoIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/defaultMargin"
+            android:contentDescription="@string/garage_logo_description_text"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/welcomeTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/defaultMargin"
+            android:layout_toRightOf="@id/garageLogoIV"
+            android:textSize="@dimen/headingTextSize"
+            android:textColor="@color/whiteeee"
+            android:gravity="center"
+            android:text="@string/welcome_text" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/inputCarBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/garageLogoIV"
+        android:layout_below="@id/headingRL"
+        android:layout_margin="@dimen/defaultMargin"
         android:text="@string/input_car_btn_text" />
 
     <Button
@@ -33,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputCarBTN"
+        android:layout_margin="@dimen/defaultMargin"
         android:text="@string/salary_calculator_btn_text" />
 
     <Button
@@ -40,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/salaryCalculatorBTN"
+        android:layout_margin="@dimen/defaultMargin"
         android:text="@string/refill_expendables_btn_text" />
 
     <Button
@@ -47,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/refillExpendablesBTN"
+        android:layout_margin="@dimen/defaultMargin"
         android:text="@string/check_balance_btn_text" />
 
 </RelativeLayout>

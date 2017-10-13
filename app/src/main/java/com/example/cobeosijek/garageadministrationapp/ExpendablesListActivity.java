@@ -50,8 +50,6 @@ public class ExpendablesListActivity extends AppCompatActivity implements Expend
     @Override
     public void onClick(View view, int position) {
 
-        //Toast.makeText(getApplicationContext(), "This is demo string on position: " + position, Toast.LENGTH_SHORT).show();
-
         myGarage.getExpendableItems().get(position).addQuantity(10);
         itemAdapter.notifyDataSetChanged();
     }
