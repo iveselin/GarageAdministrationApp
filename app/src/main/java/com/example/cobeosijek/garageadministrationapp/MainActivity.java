@@ -16,6 +16,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int KEY_CAR_REQUEST = 2;
+    public static final int KEY_GARAGE_REQUEST = 1111;
     public static final String KEY_OWNER_NAME = "owner_name";
     public static final String KEY_OWNER_EMAIL = "owner_email";
     public static final String KEY_WORK_NEEDED = "work_needed";
@@ -67,10 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.salaryCalculatorBTN:
-                // TODO: 13/10/2017 reset work hours in main
+
                 Intent startStaffList = new Intent(getApplicationContext(), StaffListActivity.class);
                 startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
-                startActivity(startStaffList);
+                startActivityForResult(startStaffList, KEY_GARAGE_REQUEST);
                 break;
 
             case R.id.refillExpendablesBTN:
@@ -98,6 +99,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (resultCode == RESULT_OK) {
                 createCar(data.getExtras());
             }
+        } else if (requestCode == KEY_GARAGE_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                updateGarage(data.getExtras());
+            }
+        }
+    }
+
+    private void updateGarage(Bundle extras) {
+        if (extras.containsKey(KEY_GARAGE_SENT)){
+            myGarage=(Garage) extras.getSerializable(KEY_GARAGE_SENT);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.cobeosijek.garageadministrationapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -22,7 +23,6 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.ItemDecoration itemDecoration;
 
-    // TODO: 12/10/2017 implement touch
     Garage myGarage;
 
     @Override
@@ -59,6 +59,17 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
     }
 
     @Override
+    public void onBackPressed() {
+
+        Intent resultIntent = new Intent();
+
+        resultIntent.putExtra(MainActivity.KEY_GARAGE_SENT, myGarage);
+        this.setResult(RESULT_OK, resultIntent);
+
+        this.finish();
+    }
+
+    @Override
     public void onClick(View view, int position) {
 
         int workCost;
@@ -71,9 +82,11 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
         String outputString = String.format(Locale.getDefault(), "%s worked for %d hour(s) and his salary is: %.2f",
                 clickedPerson.getEmployeeName(), clickedPerson.getWorkHours(), clickedPerson.getWorkHours() * workCost * 0.7);
 
-        // TODO: 13/10/2017 reflect changes on main
+        myGarage.changeBankBalance(-(clickedPerson.getWorkHours() * workCost * 0.7));
+
         getPeople().get(position).resetWorkHours();
         personAdapter.notifyDataSetChanged();
+
 
         Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
 
