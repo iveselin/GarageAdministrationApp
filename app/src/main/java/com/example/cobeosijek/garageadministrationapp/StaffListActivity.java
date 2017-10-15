@@ -32,7 +32,6 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
         setContentView(R.layout.activity_staff_list);
         myGarage = (Garage) getIntent().getSerializableExtra(MainActivity.KEY_GARAGE_SENT);
         setUI();
-
     }
 
     private void setUI() {
@@ -74,21 +73,20 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
 
         int workCost;
         Person clickedPerson = getPeople().get(position);
+
         if (clickedPerson.getClass() == Technician.class) {
             workCost = 120;
         } else {
             workCost = 50;
         }
+
         String outputString = String.format(Locale.getDefault(), "%s worked for %d hour(s) and his salary is: %.2f",
                 clickedPerson.getEmployeeName(), clickedPerson.getWorkHours(), clickedPerson.getWorkHours() * workCost * 0.7);
+        Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
 
         myGarage.changeBankBalance(-(clickedPerson.getWorkHours() * workCost * 0.7));
 
         getPeople().get(position).resetWorkHours();
         personAdapter.notifyDataSetChanged();
-
-
-        Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
-
     }
 }

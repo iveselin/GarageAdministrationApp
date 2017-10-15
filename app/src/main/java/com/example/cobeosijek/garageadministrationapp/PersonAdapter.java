@@ -44,7 +44,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         holder.personNameTV.setText(person.getEmployeeName());
         holder.personFieldOfWorkTV.setText(person.getFieldOFWork().toString());
         holder.personSalaryTV.setText(String.valueOf(person.getWorkHours()));
-
     }
 
     public void setClickListener(PersonAdapter.ItemClickListener itemClickListener) {

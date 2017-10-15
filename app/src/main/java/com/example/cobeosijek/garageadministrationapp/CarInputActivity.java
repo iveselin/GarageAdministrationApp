@@ -73,7 +73,6 @@ public class CarInputActivity extends AppCompatActivity implements View.OnClickL
         this.setResult(RESULT_OK, resultIntent);
 
         this.finish();
-
     }
 
     @Override

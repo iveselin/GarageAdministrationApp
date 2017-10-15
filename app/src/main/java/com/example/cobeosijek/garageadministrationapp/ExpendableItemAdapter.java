@@ -44,7 +44,6 @@ public class ExpendableItemAdapter extends RecyclerView.Adapter<ExpendableItemAd
         holder.itemNameTV.setText(expendableItem.getItemName());
         holder.itemTypeTV.setText(expendableItem.getExpendableType().toString());
         holder.itemQuantityTV.setText(expendableItem.getQuantityLeft() + "pcs");
-
     }
 
     public void setClickListener(OnItemClickListener itemClickListener) {

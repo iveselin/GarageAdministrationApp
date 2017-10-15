@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String KEY_WORK_NEEDED = "work_needed";
     public static final String KEY_GARAGE_SENT = "garage";
 
-    Button inputCarButton, salaryCalculatorButton, refillExpendablesButton, checkBalanceButton;
-    ImageView garageLogoImageView;
+    Button inputCarButton;
+    Button salaryCalculatorButton;
+    Button refillExpendablesButton;
+    Button checkBalanceButton;
 
     Garage myGarage;
 
@@ -45,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         salaryCalculatorButton = (Button) findViewById(R.id.salaryCalculatorBTN);
         refillExpendablesButton = (Button) findViewById(R.id.refillExpendablesBTN);
         checkBalanceButton = (Button) findViewById(R.id.checkBalanceBTN);
-        garageLogoImageView = (ImageView) findViewById(R.id.garageLogoIV);
-
     }
 
     private void setListeners() {
@@ -55,12 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         salaryCalculatorButton.setOnClickListener(this);
         refillExpendablesButton.setOnClickListener(this);
         checkBalanceButton.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
+
             case R.id.inputCarBTN:
 
                 Intent startCarInput = new Intent(getApplicationContext(), CarInputActivity.class);
@@ -75,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.refillExpendablesBTN:
-                // TODO: 13/10/2017 fix so its on long click and reflect changes onto main garage
+
                 Intent startExpendablesList = new Intent(getApplicationContext(), ExpendablesListActivity.class);
                 startExpendablesList.putExtra(KEY_GARAGE_SENT, myGarage);
-                startActivity(startExpendablesList);
+                startActivityForResult(startExpendablesList, KEY_GARAGE_REQUEST);
                 break;
 
             case R.id.checkBalanceBTN:
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createCar(data.getExtras());
             }
         } else if (requestCode == KEY_GARAGE_REQUEST) {
+
             if (resultCode == RESULT_OK) {
                 updateGarage(data.getExtras());
             }
@@ -107,8 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateGarage(Bundle extras) {
-        if (extras.containsKey(KEY_GARAGE_SENT)){
-            myGarage=(Garage) extras.getSerializable(KEY_GARAGE_SENT);
+
+        if (extras.containsKey(KEY_GARAGE_SENT)) {
+
+            myGarage = (Garage) extras.getSerializable(KEY_GARAGE_SENT);
         }
     }
 
@@ -143,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         myGarage.fixCar(carToFix);
 
-        // TODO: 13/10/2017 send car and display its info
+        String outputString = String.format("Car is fixed, cost of repair is: %.2f$", carToFix.getWorkingCost());
+        Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 
 public class ExpendableItem extends Item implements WorkingItem, Serializable {
+
     private ExpendableTypeEnum expendableType;
     private int quantityLeft;
 
@@ -52,7 +53,7 @@ public class ExpendableItem extends Item implements WorkingItem, Serializable {
 
     }
 
-    private double getUseCost() {
+    public double getUseCost() {
 
         switch (expendableType) {
 
