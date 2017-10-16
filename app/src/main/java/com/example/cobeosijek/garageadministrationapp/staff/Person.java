@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class Person implements Serializable{
+public class Person implements Serializable {
     private String employeeName;
     private FieldOfWorkEnum fieldOFWork;
     private byte workHours;

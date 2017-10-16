@@ -14,6 +14,10 @@
     <string name="both_work_radio_button">Both</string>
     <string name="radio_group_title">Choose work needed:</string>
     <string name="submit_car_text">Submit</string>
-    <string name="staf_list_heading_text">Staf list</string>
+    <string name="staf_list_heading_text">Staff list</string>
     <string name="expendables_heading_text">Expendables</string>
+    <string name="empty_TV_error_text">You can\'t leave this empty</string>
+    <string name="bank_balance_format">Your current bank balance is %.2f$</string>
+    <string name="car_fixed_text">Car is fixed, cost of repair is: %.2f$</string>
+    <string name="person_salary_format_text">%1$s worked for %2$d hour(s) and his salary is: %3$.2f</string>
 </resources>

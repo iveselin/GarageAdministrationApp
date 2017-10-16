@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
@@ -15,12 +14,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final int KEY_CAR_REQUEST = 2;
-    public static final int KEY_GARAGE_REQUEST = 1111;
-    public static final String KEY_OWNER_NAME = "owner_name";
-    public static final String KEY_OWNER_EMAIL = "owner_email";
-    public static final String KEY_WORK_NEEDED = "work_needed";
-    public static final String KEY_GARAGE_SENT = "garage";
+    private static final int KEY_CAR_REQUEST = 2;
+    private static final int KEY_GARAGE_REQUEST = 1111;
+    private static final String KEY_GARAGE_SENT = "garage_sent";
+    private static final String KEY_OWNER_NAME = "owner_name";
+    private static final String KEY_OWNER_EMAIL = "owner_email";
+    private static final String KEY_WORK_NEEDED = "work_needed";
+
 
     Button inputCarButton;
     Button salaryCalculatorButton;
@@ -29,11 +29,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Garage myGarage;
 
+    public static Intent getResultGarageIntent(Garage myGarage) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(KEY_GARAGE_SENT, myGarage);
+        return resultIntent;
+    }
+
+    public static Intent getResultCarIntent(String ownerName, String ownerEmail, int workNeededFlag) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(KEY_OWNER_NAME, ownerName);
+        resultIntent.putExtra(KEY_OWNER_EMAIL, ownerEmail);
+        resultIntent.putExtra(KEY_WORK_NEEDED, workNeededFlag);
+        return resultIntent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         setUI();
@@ -43,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setUI() {
 
-        inputCarButton = (Button) findViewById(R.id.inputCarBTN);
-        salaryCalculatorButton = (Button) findViewById(R.id.salaryCalculatorBTN);
-        refillExpendablesButton = (Button) findViewById(R.id.refillExpendablesBTN);
-        checkBalanceButton = (Button) findViewById(R.id.checkBalanceBTN);
+        inputCarButton = findViewById(R.id.inputCarBTN);
+        salaryCalculatorButton = findViewById(R.id.salaryCalculatorBTN);
+        refillExpendablesButton = findViewById(R.id.refillExpendablesBTN);
+        checkBalanceButton = findViewById(R.id.checkBalanceBTN);
     }
 
     private void setListeners() {
@@ -63,28 +76,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
 
             case R.id.inputCarBTN:
-
-                Intent startCarInput = new Intent(getApplicationContext(), CarInputActivity.class);
-                this.startActivityForResult(startCarInput, KEY_CAR_REQUEST);
+                startActivityForResult(CarInputActivity.getLaunchIntent(this), KEY_CAR_REQUEST);
                 break;
 
             case R.id.salaryCalculatorBTN:
-
-                Intent startStaffList = new Intent(getApplicationContext(), StaffListActivity.class);
-                startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
-                startActivityForResult(startStaffList, KEY_GARAGE_REQUEST);
+                startActivityForResult(StaffListActivity.getLaunchIntent(this, myGarage), KEY_GARAGE_REQUEST);
                 break;
 
             case R.id.refillExpendablesBTN:
-
-                Intent startExpendablesList = new Intent(getApplicationContext(), ExpendablesListActivity.class);
-                startExpendablesList.putExtra(KEY_GARAGE_SENT, myGarage);
-                startActivityForResult(startExpendablesList, KEY_GARAGE_REQUEST);
+                startActivityForResult(ExpendablesListActivity.getLaunchIntent(this, myGarage), KEY_GARAGE_REQUEST);
                 break;
 
             case R.id.checkBalanceBTN:
-
-                Toast.makeText(this, String.format(Locale.getDefault(), "Your current bank balance is %.2f$",
+                Toast.makeText(getApplicationContext(), String.format(Locale.getDefault(), getString(R.string.bank_balance_format),
                         myGarage.getBankBalance()), Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -92,42 +96,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == KEY_CAR_REQUEST) {
-
-            if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == KEY_CAR_REQUEST) {
                 createCar(data.getExtras());
-            }
-        } else if (requestCode == KEY_GARAGE_REQUEST) {
-
-            if (resultCode == RESULT_OK) {
+            } else if (requestCode == KEY_GARAGE_REQUEST) {
                 updateGarage(data.getExtras());
             }
         }
     }
 
     private void updateGarage(Bundle extras) {
-
         if (extras.containsKey(KEY_GARAGE_SENT)) {
-
             myGarage = (Garage) extras.getSerializable(KEY_GARAGE_SENT);
         }
     }
 
     private void createCar(Bundle extras) {
-        String ownerName = null;
-        String ownerEmail = null;
-        WorkNeededEnum workNeeded = null;
-
         if (extras.containsKey(KEY_OWNER_NAME) && extras.containsKey(KEY_OWNER_EMAIL) && extras.containsKey(KEY_WORK_NEEDED)) {
 
-            ownerName = extras.getString(KEY_OWNER_NAME);
-
-            ownerEmail = extras.getString(KEY_OWNER_EMAIL);
+            String ownerName = extras.getString(KEY_OWNER_NAME);
+            String ownerEmail = extras.getString(KEY_OWNER_EMAIL);
 
             int workNeededFlag = extras.getInt(KEY_WORK_NEEDED);
+            WorkNeededEnum workNeeded = null;
+
             switch (workNeededFlag) {
                 case 1:
                     workNeeded = WorkNeededEnum.MECHANIC;
@@ -139,16 +133,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     workNeeded = WorkNeededEnum.BOTH;
                     break;
             }
-        } else {
-            return;
+
+            Car carToFix = new Car(ownerName, ownerEmail, workNeeded);
+
+            myGarage.fixCar(carToFix);
+
+            String outputString = String.format(getString(R.string.car_fixed_text), carToFix.getWorkingCost());
+            Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_SHORT).show();
         }
-
-        Car carToFix = new Car(ownerName, ownerEmail, workNeeded);
-
-        myGarage.fixCar(carToFix);
-
-        String outputString = String.format("Car is fixed, cost of repair is: %.2f$", carToFix.getWorkingCost());
-        Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_SHORT).show();
-
     }
 }

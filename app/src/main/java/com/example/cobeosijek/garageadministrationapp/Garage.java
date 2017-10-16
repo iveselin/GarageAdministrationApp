@@ -75,17 +75,11 @@ public class Garage implements Serializable {
                 }
                 break;
 
-            default:
-                System.out.println("That is a mistake, the car is empty");
         }
         if (inputCar.isFixed()) {
 
             this.changeBankBalance(inputCar.getWorkingCost());
 
-
-        } else {
-            //alert with mistake
-            //System.out.println("We don't have enough technicians, try later");
         }
     }
 

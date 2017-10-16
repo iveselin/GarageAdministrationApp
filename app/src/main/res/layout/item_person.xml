@@ -5,19 +5,19 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/personNameTV"
+        android:id="@+id/personName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/personFieldOfWorkTV"
-        android:layout_below="@id/personNameTV"
+        android:id="@+id/personFieldOfWork"
+        android:layout_below="@id/personName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/personSalaryTV"
-        android:layout_below="@id/personFieldOfWorkTV"
+        android:id="@+id/personSalary"
+        android:layout_below="@id/personFieldOfWork"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

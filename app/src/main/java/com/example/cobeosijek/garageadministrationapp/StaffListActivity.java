@@ -14,9 +14,12 @@ import com.example.cobeosijek.garageadministrationapp.staff.Person;
 import com.example.cobeosijek.garageadministrationapp.staff.Technician;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class StaffListActivity extends AppCompatActivity implements PersonAdapter.ItemClickListener {
+
+    private static final String KEY_GARAGE_SENT = "garage";
 
     RecyclerView personListRV;
     PersonAdapter personAdapter;
@@ -25,33 +28,39 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
 
     Garage myGarage;
 
+    public static Intent getLaunchIntent(Context context, Garage myGarage) {
+        Intent startStaffList = new Intent(context, StaffListActivity.class);
+        startStaffList.putExtra(KEY_GARAGE_SENT, myGarage);
+        return startStaffList;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_list);
-        myGarage = (Garage) getIntent().getSerializableExtra(MainActivity.KEY_GARAGE_SENT);
+
+        myGarage = (Garage) getIntent().getSerializableExtra(KEY_GARAGE_SENT);
         setUI();
     }
 
     private void setUI() {
-
-        Context context = getApplicationContext();
         personListRV = findViewById(R.id.staffListRV);
-        personAdapter = new PersonAdapter(getPeople());
-        layoutManager = new LinearLayoutManager(context);
-        itemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        personAdapter = new PersonAdapter();
+        personAdapter.setPersonList(getPeople());
+        layoutManager = new LinearLayoutManager(this);
+        itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
         personListRV.addItemDecoration(itemDecoration);
         personListRV.setLayoutManager(layoutManager);
         personListRV.setAdapter(personAdapter);
 
         personAdapter.setClickListener(this);
+
+
     }
 
-    private ArrayList<Person> getPeople() {
-
-        ArrayList<Person> persons = new ArrayList<>();
+    private List<Person> getPeople() {
+        List<Person> persons = new ArrayList<>();
         persons.addAll(myGarage.getTechnicians());
         persons.addAll(myGarage.getApprentices());
         return persons;
@@ -59,13 +68,8 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
 
     @Override
     public void onBackPressed() {
-
-        Intent resultIntent = new Intent();
-
-        resultIntent.putExtra(MainActivity.KEY_GARAGE_SENT, myGarage);
-        this.setResult(RESULT_OK, resultIntent);
-
-        this.finish();
+        setResult(RESULT_OK, MainActivity.getResultGarageIntent(myGarage));
+        finish();
     }
 
     @Override
@@ -74,13 +78,13 @@ public class StaffListActivity extends AppCompatActivity implements PersonAdapte
         int workCost;
         Person clickedPerson = getPeople().get(position);
 
-        if (clickedPerson.getClass() == Technician.class) {
+        if (clickedPerson instanceof Technician) {
             workCost = 120;
         } else {
             workCost = 50;
         }
 
-        String outputString = String.format(Locale.getDefault(), "%s worked for %d hour(s) and his salary is: %.2f",
+        String outputString = String.format(Locale.getDefault(), getString(R.string.person_salary_format_text),
                 clickedPerson.getEmployeeName(), clickedPerson.getWorkHours(), clickedPerson.getWorkHours() * workCost * 0.7);
         Toast.makeText(getApplicationContext(), outputString, Toast.LENGTH_LONG).show();
 

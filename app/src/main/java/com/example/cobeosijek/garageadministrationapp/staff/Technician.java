@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class Technician extends Person implements Serializable {
+
     private int numOfApprentices;
     private static final int workCost = 120;
 
@@ -26,7 +27,6 @@ public class Technician extends Person implements Serializable {
         this.numOfApprentices = numOfApprentices;
     }
 
-
     public void doWork(Car carToFix, List<Apprentice> apprentices, List<ReusableItem> reusableItems, List<ExpendableItem> expendableItems) {
         //give a technician a car to be fixed, he will find helpers & tools from lists, if there is enough of everything, he will fix the car
         int currentNumOfApprentices = 0;
@@ -35,14 +35,14 @@ public class Technician extends Person implements Serializable {
         //reserve apprentices
         for (Apprentice apprentice : apprentices) {
 
-            if (this.numOfApprentices > currentNumOfApprentices && this.getFieldOFWork() == apprentice.getFieldOFWork() && apprentice.isAvailable()) {
+            if (numOfApprentices > currentNumOfApprentices && this.getFieldOFWork() == apprentice.getFieldOFWork() && apprentice.isAvailable()) {
                 apprentice.setAvailable(false);
                 workingApprentices.add(apprentice);
                 currentNumOfApprentices++;
             }
         }
         //if not enough apprentices, abort
-        if (currentNumOfApprentices < this.numOfApprentices) {
+        if (currentNumOfApprentices < numOfApprentices) {
 
             for (Apprentice apprentice : apprentices) {
                 apprentice.setAvailable(true);

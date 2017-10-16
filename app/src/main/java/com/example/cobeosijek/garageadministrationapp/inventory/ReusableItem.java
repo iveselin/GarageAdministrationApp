@@ -2,13 +2,11 @@ package com.example.cobeosijek.garageadministrationapp.inventory;
 
 import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
-import java.io.Serializable;
-
 /**
  * Created by cobeosijek on 11/10/2017.
  */
 
-public class ReusableItem extends Item implements WorkingItem, Serializable {
+public class ReusableItem extends Item implements WorkingItem {
 
     private double sizeOfItem;
 
@@ -26,18 +24,14 @@ public class ReusableItem extends Item implements WorkingItem, Serializable {
         return sizeOfItem;
     }
 
-
     public ReusableTypeEnum getTypeEnum() {
         return typeEnum;
     }
 
     @Override
     public boolean beUsed(Car carToBeFixed) {
-
-        carToBeFixed.addWorkCost(this.getUseCost());
-
+        carToBeFixed.addWorkCost(getUseCost());
         return true;
-
     }
 
     private double getUseCost() {

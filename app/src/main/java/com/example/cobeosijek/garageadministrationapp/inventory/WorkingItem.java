@@ -8,6 +8,6 @@ import com.example.cobeosijek.garageadministrationapp.working_on.Car;
 
 public interface WorkingItem {
 
-    public boolean beUsed(Car carToBeFixed);
+    boolean beUsed(Car carToBeFixed);
 
 }

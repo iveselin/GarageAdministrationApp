@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.cobeosijek.garageadministrationapp.staff.Person;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cobeosijek on 12/10/2017.
@@ -20,30 +21,18 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         void onClick(View view, int position);
     }
 
-    ArrayList<Person> persons;
+    private List<Person> persons = new ArrayList<>();
     private ItemClickListener itemClickListener;
 
-    public PersonAdapter(ArrayList<Person> persons) {
-        this.persons = persons;
+    public void setPersonList(List<Person> personList) {
+        persons.clear();
+        persons.addAll(personList);
+        notifyDataSetChanged();
     }
 
-    @Override
-    public PersonAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View personView = inflater.inflate(R.layout.item_person, parent, false);
-
-        return new ViewHolder(personView);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        Person person = persons.get(position);
-
-        holder.personNameTV.setText(person.getEmployeeName());
-        holder.personFieldOfWorkTV.setText(person.getFieldOFWork().toString());
-        holder.personSalaryTV.setText(String.valueOf(person.getWorkHours()));
+    public void addPersonList(List<Person> personList) {
+        persons.addAll(personList);
+        notifyDataSetChanged();
     }
 
     public void setClickListener(PersonAdapter.ItemClickListener itemClickListener) {
@@ -51,31 +40,51 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     }
 
     @Override
+    public PersonAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View personView = inflater.inflate(R.layout.item_person, parent, false);
+
+        return new ViewHolder(personView, itemClickListener);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Person person = persons.get(position);
+
+        holder.personNameTV.setText(person.getEmployeeName());
+        holder.personFieldOfWorkTV.setText(person.getFieldOFWork().toString());
+        holder.personSalaryTV.setText(String.valueOf(person.getWorkHours()));
+    }
+
+    @Override
     public int getItemCount() {
         return persons.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final ItemClickListener listener;
         TextView personNameTV;
         TextView personFieldOfWorkTV;
         TextView personSalaryTV;
 
-
-        public ViewHolder(View itemView) {
-
+        public ViewHolder(View itemView, ItemClickListener listener) {
             super(itemView);
-            this.personNameTV = itemView.findViewById(R.id.personNameTV);
-            this.personFieldOfWorkTV = itemView.findViewById(R.id.personFieldOfWorkTV);
-            this.personSalaryTV = itemView.findViewById(R.id.personSalaryTV);
+
+            this.listener = listener;
+            this.personNameTV = itemView.findViewById(R.id.personName);
+            this.personFieldOfWorkTV = itemView.findViewById(R.id.personFieldOfWork);
+            this.personSalaryTV = itemView.findViewById(R.id.personSalary);
 
             itemView.setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View view) {
-            itemClickListener.onClick(view, getAdapterPosition());
+            if (listener != null) {
+                listener.onClick(view, getAdapterPosition());
+            }
         }
     }
 }

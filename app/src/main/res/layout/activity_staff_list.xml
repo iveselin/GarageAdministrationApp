@@ -26,6 +26,7 @@
             android:layout_margin="@dimen/defaultMargin"
             android:layout_toRightOf="@id/garageLogoIV"
             android:gravity="center"
+            android:layout_centerVertical="true"
             android:text="@string/staf_list_heading_text"
             android:textColor="@color/whiteeee"
             android:textSize="@dimen/headingTextSize" />

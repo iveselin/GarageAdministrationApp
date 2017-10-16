@@ -28,6 +28,7 @@
             android:layout_toRightOf="@id/garageLogoIV"
             android:textSize="@dimen/headingTextSize"
             android:textColor="@color/whiteeee"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:text="@string/welcome_text" />
 
